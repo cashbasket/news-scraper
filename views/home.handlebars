@@ -1,0 +1,53 @@
+
+<h1 class="text-center display-4">WE SCRAPE <em>THE ONION</em>. DON'T TELL.</h1>
+<p class="lead">Here at <strong>Scraped Onion</strong>, we are dedicated to providing you with the exact content you could have found by <a href="http://lmgtfy.com/?q=The+Onion" target="_blank">searching for an entirely different website</a>. What sets us apart is that we let you leave comments on the articles here instead of having to do it on social media. While we totally understand and support the fact that a certain other site wants nothing to do with anyone's comments, we support your right to voice your anger about things that are not at all meant to be taken seriously.</em></p>
+<p class="float-right"><small>If you don't like anything you read here, please direct all complaints to the editorial team at <a href="https://www.theonion.com" target="_blank">The Onion</a>.</small></p>
+</p>
+<div class="clearfix"></div>
+<hr class="my-4" />
+{{#if articles}}
+	<div id="scrapedConfirm" class="alert alert-success text-center d-none"></div>
+	{{#each articles}}
+		<div class="card article-card">
+			<div class="card-header">
+				<h5><a href="{{link}}" target="_blank">{{title}}</a></h5>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					{{#if image}}
+					<div class="col-md-3">
+						<img src="{{image}}" class="img-fluid" />
+					</div>
+					{{/if}}
+					<div class="col-md-{{#if image}}9{{else}}12{{/if}}">
+						<p><small><em><strong>Posted {{formatDate postedAt "M/D/YYYY, h:mma"}}</strong> (scraped {{formatDate scrapedAt "M/D/YYYY, h:mma"}})</em></small></p>
+						<p class="excerpt">{{excerpt}}</p>
+						<div class="row">
+							<div class="col">
+								<strong><a href="{{link}}" target="_blank"><i class="far fa-newspaper"></i> Read Full Article</a></strong>
+							</div>
+							<div class="col">
+								<strong><a href="javascript:void(0)" id="viewComments-{{_id}}" data-id="{{_id}}" class="view-comments float-right"><i class="far fa-comment-alt"></i> <span class="view-comments-text">Leave a comment</span></a></strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{{/each}}
+{{else}}
+<div class="alert alert-warning text-center">
+	<p class="text-center">There are currently no scraped articles!</p>
+	<button id="scrapeBody" class="btn btn-primary" data-toggle="modal" data-target="#scrapingModal"><strong>YOU MUST SCRAPE</strong></button>.
+</div>
+{{/if}}
+<div class="modal" id="scrapingModal" tabindex="-1" role="dialog" aria-labelledby="scrapingTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body text-center">
+				<i class="fas fa-2x fa-sync fa-spin"></i>
+				<h5 class="scraping-text text-center">Scraping <em>The Onion</em>...</h5>
+			</div>
+		</div>
+	</div>
+</div>

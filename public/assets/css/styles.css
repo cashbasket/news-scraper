@@ -1,0 +1,72 @@
+body {
+	font-size: 16px;
+	margin-top: 90px;
+}
+
+.site {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+.container {
+	max-width: 1040px;
+}
+
+.site-content {
+	flex: 1;
+}
+
+.navbar {
+	padding: 0;
+}
+
+.navbar-brand {
+	font-family: 'Bangers', cursive;
+	font-size: 36px;
+}
+
+.nav-link {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.scraping-text {
+	margin-top: 15px;
+}
+
+#scrapedConfirm {
+	font-size: 24px;
+}
+
+h1 {
+	margin-bottom: 25px;
+}
+
+.article-card {
+	margin-bottom: 15px;
+}
+
+.card-header > h5 {
+	margin: 0;
+}
+
+.card-header > h5 > a {
+	color: #000;
+	text-decoration: none;
+}
+
+.no-excerpt {
+	border-radius: 5px;
+	padding: 10px;
+	text-align: center;
+}
+
+footer.site-footer {
+	background-color: #343a40;
+	color: #fff;
+	font-size: 14px;
+	margin-top: 20px;
+	padding: 10px 0;
+	text-align: center;
+}
