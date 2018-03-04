@@ -10,6 +10,10 @@ $.urlParam = function(name, url) {
 };
 
 $(document).ready(function() {
+	if ($.urlParam('scraped')) {
+		$('#introSection').addClass('d-none');
+	} 
+	
 	if ($.urlParam('scraped') && $.urlParam('scraped') !== '0') {
 		var confirmEnding = $.urlParam('scraped') === '1' ? ' new article was added!' : ' new articles were added!';
 		$('#scrapedConfirm').text($.urlParam('scraped') + confirmEnding)
@@ -19,6 +23,7 @@ $(document).ready(function() {
 			.addClass('alert-danger')
 			.text('Sorry, no new articles are available.')
 	}
+	
 	$('#scrape, #scrapeBody').on('click', function(event) {
 		$.ajax('/fetch').then(function(response) {
 			location.href = '/?scraped=' + response.length;

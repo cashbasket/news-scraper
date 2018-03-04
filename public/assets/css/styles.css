@@ -31,6 +31,17 @@ body {
 	font-weight: bold;
 }
 
+.btn-scrape {
+	font-weight: bold;
+}
+
+.title-image {
+	display: block;
+	margin: 0 auto 20px auto;
+	max-width: 75%;
+	width: 250px;
+}
+
 .scraping-text {
 	margin-top: 15px;
 }
@@ -41,6 +52,10 @@ body {
 
 h1 {
 	margin-bottom: 25px;
+}
+
+h1 .subtitle {
+	font-size: 36px;
 }
 
 .article-card {
@@ -69,4 +84,15 @@ footer.site-footer {
 	margin-top: 20px;
 	padding: 10px 0;
 	text-align: center;
+}
+
+@media screen and (max-width: 575px) {
+	h1 {
+		font-size: 36px !important;
+	}
+
+	.btn-scrape {
+		margin: 15px;
+		text-align: center;
+	}
 }
