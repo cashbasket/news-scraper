@@ -98,7 +98,7 @@ $(document).ready(function() {
 		var videoLink = $('div.dumb-fact').parent().find('a.source-link').attr('href');
 		if(!$(this).text().length) {
 			var randomDumbFact = dumbFacts[getRandomInt(0, dumbFacts.length - 1)];
-			$(this).html('<div class="no-excerpt alert alert-nada"><p><em>This article has no excerpt OR image because it\'s a video article, so <a href="' + videoLink + '" target="_blank">feel free to watch it here</a>.<br> Sorry. To make up for this, here\'s a random, dumb fact you don\'t care about:</em></p><blockquote class="blockquote text-center"><p class="mb-0">' + randomDumbFact + '</p></blockquote></div>');
+			$(this).html('<div class="no-excerpt alert alert-danger"><p><em>This article has no excerpt OR image because it\'s a video article, so <a href="' + videoLink + '" target="_blank">feel free to watch it here</a>.<br> Sorry. To make up for this, here\'s a random, dumb fact you don\'t care about:</em></p><blockquote class="blockquote text-center"><p class="mb-0">' + randomDumbFact + '</p></blockquote></div>');
 		}
 	});
 });

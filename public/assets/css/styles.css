@@ -1,3 +1,17 @@
+@keyframes pulsate {
+    0% {background-color: #bb2323;}
+    50% {background-color: #ff0000;}
+    100% {background-color: #bb2323;}
+}
+
+.pulsate {
+	-webkit-animation: pulsate 4s infinite;
+    -moz-animation: pulsate 4s infinite;
+    -ms-animation: pulsate 4s infinite;
+    -o-animation: pulsate 4s infinite;
+    animation: pulsate 4s infinite;
+}
+
 body {
 	background-color: #f1f1f1;
 	font-family: 'Open Sans', sans-serif;
@@ -43,6 +57,7 @@ body a:hover {
 
 .btn-scrape {
 	font-weight: bold;
+	border-color: #bb2323;
 }
 
 .intro-section a {
@@ -184,10 +199,6 @@ h1 .subtitle {
 
 .note-status {
 	color: #ffff00;
-}
-
-.alert-nada {
-	background-color: #f0d1df;
 }
 
 .no-excerpt {
