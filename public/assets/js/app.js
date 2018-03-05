@@ -59,7 +59,7 @@ function createNoteEditor(noteId) {
 $(document).ready(function() {
 
 	var queryScraped = $.urlParam('scraped');
-	var queryNew = queryNew;
+	var queryNew = $.urlParam('new');
 	var selfReferral = document.referrer.match(/^http(s)?:\/\/(localhost:3000|cryptic-hollows-30966\.herokuapp\.com)(.*)$/);
 
 	if ((queryScraped && !queryNew) && selfReferral){
