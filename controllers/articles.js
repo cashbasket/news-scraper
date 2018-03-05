@@ -56,7 +56,6 @@ router.delete('/articles/:articleId/:noteId', function(req, res) {
 			}).then(function(article) {
 				article.notes.remove(mongoose.Types.ObjectId(req.params.noteId));
 				article.save();
-				console.log(article);
 				res.json(article);
 			}).catch(function(err) {
 				res.json(err);
