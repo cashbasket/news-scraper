@@ -1,0 +1,20 @@
+<form id="noteForm-{{this._id}}" data-article-id="{{this._id}}" class="note-form">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="name">Who are you?</label>
+				<input required type="text" class="form-control" id="noteName-{{this._id}}" name="name" maxlength="255" placeholder="Enter your name">
+			</div>
+			<h6>Write your note (500 chars max):</h6>
+			<div id="noteBody-{{this._id}}"></div>
+			<div class="row">
+				<div class="col-md-10">
+					<p id="noteStatus-{{this._id}}" class="note-status d-none">PRO-TIP: You need to write a note before you can submit one.</p>
+				</div>
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-secondary btn-note-submit float-right">Submit Note</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
