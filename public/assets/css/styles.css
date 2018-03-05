@@ -45,6 +45,11 @@ body a:hover {
 	font-weight: bold;
 }
 
+.intro-section a {
+	color: #bb2323;
+	font-weight: bold;
+}
+
 .title-image,
 .body-image {
 	display: block;
