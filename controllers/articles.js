@@ -1,6 +1,7 @@
 var db = require('../models'),
 	mongoose = require('mongoose'),
 	express = require('express'),
+	scraper = require('../scripts/scrape'),
 	router = express.Router();
 
 // gets all the articles
@@ -14,6 +15,19 @@ router.get('/', function(req, res) {
 			};
 			res.render('home', articlesObj);
 		});
+});
+
+router.post('/', function(req, res) {
+	scraper(function(inserted) {
+		console.log(inserted.length);
+		req.session.sessionFlash = {
+			type: inserted.length > 0 ? 'success' : 'danger',
+			message: inserted.length > 0 ? 'Added ' + inserted.length + ' new articles.' : 'No new articles were found.'
+		};
+		req.session.save(function(err) {
+			res.redirect(301, '/');
+		});
+	});
 });
 
 // returns an article with its note
