@@ -16,7 +16,7 @@ body {
 	background-color: #f1f1f1;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
-	margin-top: 90px;
+	margin-top: 75px;
 }
 
 body a {
@@ -199,6 +199,10 @@ h1 .subtitle {
 
 .note-status {
 	color: #ffff00;
+}
+
+.alert > h4 {
+	margin: 0;
 }
 
 .no-excerpt {
