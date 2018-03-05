@@ -19,7 +19,6 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
 	scraper(function(inserted) {
-		console.log(inserted.length);
 		req.session.sessionFlash = {
 			type: inserted.length > 0 ? 'success' : 'danger',
 			message: inserted.length > 0 ? 'Added ' + inserted.length + ' new articles.' : 'No new articles were found.'
