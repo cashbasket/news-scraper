@@ -57,9 +57,19 @@ function createNoteEditor(noteId) {
 }
 
 $(document).ready(function() {
-	if ($.urlParam('scraped')) {
+
+	var queryScraped = $.urlParam('scraped');
+	var queryNew = queryNew;
+	var selfReferral = document.referrer.match(/^http(s)?:\/\/(localhost:3000|cryptic-hollows-30966\.herokuapp\.com)(.*)$/);
+
+	if ((queryScraped && !queryNew) && selfReferral){
 		scrollToAnchor('articles');
-	} 
+	} else if ((!queryScraped && !queryNew) || (((queryScraped.length) || queryNew) && !selfReferral)) {
+		$('#scrapingModal').modal();
+		$.ajax('/fetch').then(function(response) {
+			location.href = '/?new=1&scraped=' + response.length;
+		});
+	}
 
 	// display the comments section for the post
 	$('.view-notes').on('click', function() {
@@ -108,7 +118,6 @@ $(document).ready(function() {
 				_id: noteId
 			}
 		}).then(function(data) {
-			console.log(data);
 			$('#note-' + noteId).remove();
 			if(!data.notes.length) {
 				$('#noteFormWrapper-' + data._id).removeClass('d-none');
@@ -117,17 +126,17 @@ $(document).ready(function() {
 		});
 	});
 	
-	if ($.urlParam('scraped') && $.urlParam('scraped') !== '0') {
-		var confirmEnding = $.urlParam('scraped') === '1' ? ' new article was added!' : ' new articles were added!';
-		$('#scrapedConfirm').text($.urlParam('scraped') + confirmEnding)
+	if (queryScraped && queryScraped !== '0' && !queryNew) {
+		var confirmEnding = queryScraped === '1' ? ' new article was added!' : ' new articles were added!';
+		$('#scrapedConfirm').text(queryScraped + confirmEnding)
 			.removeClass('d-none');
-	} else if ($.urlParam('scraped') && $.urlParam('scraped') === '0') {
+	} else if (queryScraped && queryScraped === '0' && !queryNew) {
 		$('#scrapedConfirm').removeClass('alert-success d-none')
 			.addClass('alert-danger')
 			.text('Sorry, no new articles are available.');
 	}
 	
-	$('#scrape, #scrapeBody').on('click', function(event) {
+	$('#scrape, #scrapeBody').on('click', function() {
 		$.ajax('/fetch').then(function(response) {
 			location.href = '/?scraped=' + response.length;
 		});
