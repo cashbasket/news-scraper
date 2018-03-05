@@ -57,17 +57,15 @@ function createNoteEditor(noteId) {
 }
 
 $(document).ready(function() {
-
-	var queryScraped = $.urlParam('scraped');
-	var queryNew = $.urlParam('new');
+	
 	var selfReferral = document.referrer.match(/^http(s)?:\/\/(localhost:3000|cryptic-hollows-30966\.herokuapp\.com)(.*)$/);
 
-	if ((queryScraped && !queryNew) && selfReferral){
-		scrollToAnchor('articles');
-	} else if ((!queryScraped && !queryNew) || (((queryScraped.length) || queryNew) && !selfReferral)) {
+	if ((!selfReferral)) {
 		$('#scrapingModal').modal();
-		$.ajax('/fetch').then(function(response) {
-			location.href = '/?new=1&scraped=' + response.length;
+		$.ajax('/', {
+			method: 'POST'
+		}).then(function(response) {
+			$('#scrapingModal').modal('hide');
 		});
 	}
 
@@ -123,22 +121,6 @@ $(document).ready(function() {
 				$('#noteFormWrapper-' + data._id).removeClass('d-none');
 				$('#notesWrapper-' + data._id + ', #newNote-' + data._id).addClass('d-none');
 			}
-		});
-	});
-	
-	if (queryScraped && queryScraped !== '0' && !queryNew) {
-		var confirmEnding = queryScraped === '1' ? ' new article was added!' : ' new articles were added!';
-		$('#scrapedConfirm').text(queryScraped + confirmEnding)
-			.removeClass('d-none');
-	} else if (queryScraped && queryScraped === '0' && !queryNew) {
-		$('#scrapedConfirm').removeClass('alert-success d-none')
-			.addClass('alert-danger')
-			.text('Sorry, no new articles are available.');
-	}
-	
-	$('#scrape, #scrapeBody').on('click', function() {
-		$.ajax('/fetch').then(function(response) {
-			location.href = '/?scraped=' + response.length;
 		});
 	});
 });
