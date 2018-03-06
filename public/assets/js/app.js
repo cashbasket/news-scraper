@@ -90,9 +90,7 @@ $(document).ready(function() {
 	});
 
 	// turn on tooltips for "delete post" link
-	$('body').tooltip({
-		selector: '[data-toggle=tooltip]'
-	});
+	$('[data-toggle="tooltip"]').tooltip();
 
 	// display the comments section for the post
 	$('.view-notes').on('click', function() {
@@ -128,7 +126,7 @@ $(document).ready(function() {
 			$('#noteName-' + articleId).val('');
 			$('#newNote-' + articleId + ', #notesWrapper-' + articleId).removeClass('d-none');
 			$('#noteFormWrapper-' + articleId).addClass('d-none');
-			$('#notes-' + articleId + ' > .card.notes-card > .card-body').append('<div id="note-' + data._id + '" class="row note"><div class="col-md-12"><div class="card note-card bg-light mb-3"><div class="card-body"><div class="d-flex w-100 justify-content-between"><h4><small>Note from <strong>' + data.name + '</strong>:</small></h4><a id="delete-' + data._id + '" data-id="' + data._id + '" data-article-id="' + articleId + '" class="delete-note" data-toggle="tooltip" data-placement="top" title="Shamelessly delete note" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a></div>' + data.body + '</div></div></div></div>');
+			$('#notes-' + articleId + ' > .card.notes-card > .card-body').append('<div id="note-' + data._id + '" class="row note"><div class="col-md-12"><div class="card note-card bg-light mb-3"><div class="card-body"><div class="d-flex w-100 justify-content-between"><h4><small>Note from <strong>' + data.name + '</strong>:</small></h4><a id="delete-' + data._id + '" data-id="' + data._id + '" data-article-id="' + articleId + '" class="delete-note" data-balloon="Shamelessly delete note" data-balloon-pos="left" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a></div>' + data.body + '</div></div></div></div>');
 		});
 	});
 
@@ -142,6 +140,7 @@ $(document).ready(function() {
 			}
 		}).then(function(data) {
 			$('#note-' + noteId).remove();
+			$(this).tooltip('dispose');
 			if(!data.notes.length) {
 				$('#noteFormWrapper-' + data._id).removeClass('d-none');
 				$('#notesWrapper-' + data._id + ', #newNote-' + data._id).addClass('d-none');
