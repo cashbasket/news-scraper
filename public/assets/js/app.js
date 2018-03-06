@@ -79,7 +79,7 @@ $(document).ready(function() {
 		scrollToAnchor('articles');
 
 	// this ensures that doScrape() won't be called over and over
-	var selfReferral = document.referrer.match(/^http(s)?:\/\/(localhost:3000|cryptic-hollows-30966\.herokuapp\.com)(.*)$/);
+	var selfReferral = document.referrer.match(/^http(s)?:\/\/(localhost:3000|scraped-onion\.herokuapp\.com)(.*)$/);
 	if (!selfReferral || reloaded) {
 		doScrape('/');
 	}
