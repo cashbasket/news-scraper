@@ -19,11 +19,9 @@ body {
 	margin-top: 75px;
 }
 
-body a {
-	color: #a07488;
-}
-
-body a:hover {
+body a,
+body a:hover,
+body a:active {
 	color: #bb2323;
 }
 
@@ -92,11 +90,11 @@ h1 .subtitle {
 	font-size: 36px;
 }
 
-.notes-wrapper a {
+.new-note-card a {
 	color: #fff;
 }
 
-.notes-wrapper a:hover {
+.new-note-card a:hover {
 	color: #dddddd;
 }
 
@@ -201,7 +199,7 @@ h1 .subtitle {
 	color: #ffff00;
 }
 
-.alert > h4 {
+.alert > h5 {
 	margin: 0;
 }
 
