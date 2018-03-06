@@ -231,4 +231,8 @@ footer.site-footer {
 		margin: 15px;
 		text-align: center;
 	}
+
+	.body-image {
+		max-width: 100%;
+	}
 }
