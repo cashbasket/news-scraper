@@ -17,14 +17,17 @@ router.get('/', function(req, res) {
 		});
 });
 
-router.post('/', function(req, res) {
+router.post('/:var(scrape)?', function(req, res) {
 	scraper(function(inserted) {
-		req.session.sessionFlash = {
-			type: inserted.length > 0 ? 'success' : 'danger',
-			message: inserted.length > 0 ? 'Added ' + inserted.length + ' new articles.' : 'No new articles were found.'
-		};
+		// if user pressed the "scrape" button, send a flash message indicating what happened
+		if (req.url === '/scrape') {
+			req.session.sessionFlash = {
+				type: inserted.length > 0 ? 'success' : 'info',
+				message: inserted.length > 0 ? 'Just scraped' + inserted.length + ' new articles!' : 'No new articles to scrape.'
+			};
+		}
 		req.session.save(function(err) {
-			res.redirect(301, '/');
+			res.json(inserted);
 		});
 	});
 });
