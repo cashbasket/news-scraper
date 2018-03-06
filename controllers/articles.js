@@ -2,7 +2,15 @@ var db = require('../models'),
 	mongoose = require('mongoose'),
 	express = require('express'),
 	scraper = require('../scripts/scrape'),
+	RateLimit = require('express-rate-limit'),
 	router = express.Router();
+
+var rateLimiter = new RateLimit({
+	windowMs: 15*60*1000, // 15 minutes
+	max: 30,
+	delayMs: 0,
+	message: 'Yeah, you\'re either scraping too much or posting WAY too many notes.  Try again in 15 minutes.'
+});
 
 // gets all the articles
 router.get('/', function(req, res) {
@@ -17,7 +25,7 @@ router.get('/', function(req, res) {
 		});
 });
 
-router.post('/:var(scrape)?', function(req, res) {
+router.post('/:var(scrape)?', rateLimiter, function(req, res) {
 	scraper(function(inserted) {
 		// if user pressed the "scrape" button, send a flash message indicating what happened
 		if (req.url === '/scrape') {
@@ -41,8 +49,8 @@ router.get('/articles/:id', function(req, res) {
 		});
 });
 
-// creates or updates an article's note
-router.post('/articles/:id', function(req, res) {
+// creates a note
+router.post('/articles/:id', rateLimiter, function(req, res) {
 	var newNote;
 	db.Note.create({
 		name: req.body.name,
