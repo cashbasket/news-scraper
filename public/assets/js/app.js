@@ -33,11 +33,6 @@ function strip_tags (input, allowed) { // eslint-disable-line camelcase
 	}
 }
 
-function scrollToAnchor(aid){
-	var aTag = $('a[name=\''+ aid +'\']');
-	$('html,body').animate({scrollTop: aTag.offset().top},'fast');
-}
-
 function createNoteEditor(noteId) {
 	var noteEditor = new Quill('#noteBody-' + noteId, {
 		modules: {
@@ -56,10 +51,11 @@ function createNoteEditor(noteId) {
 	});
 }
 
-function doScrape(route) {
+function doScrape(manual) {
+	var route = manual ? '/scrape?manual=true' : '/scrape';
 	$('#scrapingModal').modal();
 	$.ajax(route, {
-		method: 'POST'
+		method: 'GET'
 	}).then(function(response) {
 		$('#scrapingModal').modal('hide');
 		location.href='/';
@@ -74,19 +70,15 @@ $(document).ready(function() {
 	else
 		reloaded = false;
 
-	// if page was just scraped with the "scrape" button, scroll 'em down to the articles
-	if ($('#scrapeResult').length)
-		scrollToAnchor('articles');
-
 	// this ensures that doScrape() won't be called over and over
 	var selfReferral = document.referrer.match(/^http(s)?:\/\/(localhost:3000|scraped-onion\.herokuapp\.com)(.*)$/);
 	if (!selfReferral || reloaded) {
-		doScrape('/');
+		doScrape(false);
 	}
 
 	// if someone clicks the "scrape" button, then... well, do a scrape.
 	$('#scrape').on('click', function(event) {
-		doScrape('/scrape');
+		doScrape(true);
 	});
 
 	// turn on tooltips for "delete post" link
