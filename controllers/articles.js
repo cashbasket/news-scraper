@@ -37,7 +37,7 @@ router.get('/scrape', rateLimiter, nocache, function(req, res) {
 		var manual = req.query.manual === 'true' ? true : false;
 		req.session.sessionFlash = {
 			type: inserted.length > 0 ? 'success' : 'info',
-			message: inserted.length > 0 ? 'Just scraped' + inserted.length + ' new articles!' : ( manual ? 'No new articles to scrape.' : 'Everything\'s up-to-date!')
+			message: inserted.length > 0 ? 'Just scraped ' + inserted.length + ' new articles!' : ( manual ? 'No new articles to scrape.' : 'Everything\'s up-to-date!')
 		};
 		req.session.save(function(err) {
 			res.json(inserted);
