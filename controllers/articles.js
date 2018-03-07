@@ -9,8 +9,15 @@ var rateLimiter = new RateLimit({
 	windowMs: 15*60*1000, // 15 minutes
 	max: 30,
 	delayMs: 0,
-	message: 'Yeah, you\'re either scraping too much or posting WAY too many notes.  Try again in 15 minutes.'
+	message: 'So, you\'re either scraping too much or posting WAY too many notes.  Try again in 15 minutes.'
 });
+
+function nocache(req, res, next) {
+	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+	res.header('Expires', '-1');
+	res.header('Pragma', 'no-cache');
+	next();
+}
 
 // gets all the articles
 router.get('/', function(req, res) {
@@ -25,15 +32,13 @@ router.get('/', function(req, res) {
 		});
 });
 
-router.post('/:var(scrape)?', rateLimiter, function(req, res) {
+router.get('/scrape', rateLimiter, nocache, function(req, res) {
 	scraper(function(inserted) {
-		// if user pressed the "scrape" button, send a flash message indicating what happened
-		if (req.url === '/scrape') {
-			req.session.sessionFlash = {
-				type: inserted.length > 0 ? 'success' : 'info',
-				message: inserted.length > 0 ? 'Just scraped' + inserted.length + ' new articles!' : 'No new articles to scrape.'
-			};
-		}
+		var manual = req.query.manual === 'true' ? true : false;
+		req.session.sessionFlash = {
+			type: inserted.length > 0 ? 'success' : 'info',
+			message: inserted.length > 0 ? 'Just scraped' + inserted.length + ' new articles!' : ( manual ? 'No new articles to scrape.' : 'Everything\'s up-to-date!')
+		};
 		req.session.save(function(err) {
 			res.json(inserted);
 		});
