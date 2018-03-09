@@ -53,7 +53,7 @@
 							{{/if}}
 							<div class="row">
 								<div class="col">
-									<strong><a class="source-link" href="{{link}}" target="_blank">{{#if image}}<i class="far fa-image"></i> View Original{{else}}<i class="fas fa-video"></i> Watch Video{{/if}}</a></strong>
+									<strong><a class="source-link" href="{{link}}" target="_blank">{{#unless image}}<i class="fas fa-newspaper"></i> View Original{{/unless}}</a></strong>
 								</div>
 								<div class="col">
 									<strong><a href="javascript:void(0)" id="viewNotes-{{_id}}" data-id="{{_id}}" class="view-notes float-right"><i class="far fa-sticky-note"></i> <span class="view-comments-text">Notes</span></a></strong>
