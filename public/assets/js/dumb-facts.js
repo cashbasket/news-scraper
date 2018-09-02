@@ -95,7 +95,6 @@ function getRandomInt(min, max) {
 
 $(document).ready(function() {
 	$('.dumb-fact').each(function(){
-		const originalLink = $('div.dumb-fact').parent().find('a.source-link').attr('href');
 		if(!$(this).text().length) {
 			const randomDumbFact = dumbFacts[getRandomInt(0, dumbFacts.length - 1)];
 			$(this).html(`
@@ -105,7 +104,7 @@ $(document).ready(function() {
 						<img src="https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif" class="img-fluid" />
 					</div>
 				<div class="col-md-8">
-					<p><em>This article has no excerpt OR image because it's a video article or something else weird, so feel free to <a href="${originalLink}" target="_blank">view  the original here</a>.</p><p>To make up for the lack of content, here's a random, dumb fact you don't care about:</em></p>
+					<p><em>This article has no excerpt OR image because it's a video article or something else weird, so feel free to <a view the original by clicking the "View Original" link at the bottom left.</p><p>To make up for the lack of content, here's a random, dumb fact you don't care about:</em></p>
 					<blockquote class="blockquote text-center">
 						<p class="mb-0">${randomDumbFact}</p>
 					</blockquote>
