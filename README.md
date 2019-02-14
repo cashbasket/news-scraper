@@ -16,4 +16,4 @@ To start the server, type `node server`, and to view the local site, visit `http
 
 ## Future Plans
 
-I plan on adding user authentication to this project (probably w/ Passport.js) as soon as possible.  Otherwise, chaos will ensue.  CHAOS, I tell you!
+I plan on adding user authentication to this project (probably w/ Passport.js) at some point.
